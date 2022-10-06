@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Test script "activepage.js"</title>
+</head>
+<body>
+
+	<h4>Gets active page and displays browsing history</h4>
+	<hr>
+
+	<div id="info">
+		<span id="page"></span>
+		<div id="history"></div>
+	</div>
+
+
+<script src="../activepage.js"></script>
+<script>
+function main() {
+	var page_name = localStorage.getItem("active_page", page);
+	document.getElementById('page').innerHTML = `<b>Current Page</b>: ${page_name}`;
+
+	var stored_history = JSON.parse(localStorage.getItem("browsing_history"));
+	if (stored_history == null) {
+		stored_history = [];
+	};
+
+	document.getElementById('history').innerHTML = `<b>History</b>:`;
+	stored_history.forEach(function (data, index) {
+		document.getElementById('history').innerHTML += `<br>${data},`;
+	});
+
+}
+document.addEventListener('visibilitychange', function() {
+	main();
+});
+
+main();
+</script>
+
+</body>
+</html>
